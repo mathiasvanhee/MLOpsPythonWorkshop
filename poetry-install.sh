@@ -17,7 +17,7 @@ add_dependencies
 
 POETRY_VERSION=1.8.3
 python -m pip install --upgrade pip
-python -m pip install --user "poetry==$POETRY_VERSION"
+python -m pip install "poetry==$POETRY_VERSION"
 
 cd packages/mlopspython-inference/
 python -m poetry install
