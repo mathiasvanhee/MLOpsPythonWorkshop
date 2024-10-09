@@ -42,7 +42,10 @@ class TestInference(unittest.TestCase):
 
         # Step 8: Verify that the correct methods were called with expected parameters
         self.mock_image_loader.load_img.assert_called_once_with(test_image)
-        self.mock_model.predict.assert_called_once_with(np.ones((1, 224, 224, 3)))
+
+        # Step 9: Capture the argument passed to predict and verify it using np.array_equal
+        args, _ = self.mock_model.predict.call_args
+        np.testing.assert_array_equal(args[0], np.ones((1, 224, 224, 3)))
 
 
 if __name__ == '__main__':
