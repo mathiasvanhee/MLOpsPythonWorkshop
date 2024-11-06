@@ -1,9 +1,9 @@
 name: Python Continuous Integration
 on:
   push:
-    branches: [ "main", "test/maxence" ]
+    branches: [ "main", "test/maxence", "test/mathias" ]
   pull_request:
-    branches: [ "main", "test/maxence" ]
+    branches: [ "main", "test/maxence", "test/mathias" ]
 
 
 env:
