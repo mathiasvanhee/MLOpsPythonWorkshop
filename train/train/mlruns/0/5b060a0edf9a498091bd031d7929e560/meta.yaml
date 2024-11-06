@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/maxence/Documents/MLOpsPythonWorkshop/train/train/mlruns/0/5b060a0edf9a498091bd031d7929e560/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 5b060a0edf9a498091bd031d7929e560
+run_name: rogue-duck-559
+run_uuid: 5b060a0edf9a498091bd031d7929e560
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1730905737522
+status: 1
+tags: []
+user_id: maxence

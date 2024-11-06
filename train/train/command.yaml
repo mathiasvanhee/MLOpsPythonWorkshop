@@ -9,7 +9,7 @@ version: 0.0.1
 is_deterministic: true
 
 inputs:
-  split_images_input:
+  dataset:
     type: uri_folder
 
 outputs:
@@ -24,6 +24,6 @@ environment:
 code: ./
 command: >-
   python command.py
-  --split_images_input ${{inputs.split_images_input}}
+  --dataset ${{inputs.dataset}}
   --model_output ${{outputs.model_output}}
 

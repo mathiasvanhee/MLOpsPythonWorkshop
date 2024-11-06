@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/maxence/Documents/MLOpsPythonWorkshop/train/train/mlruns/0/85deedf4e01a4b1fa9d2fc48581a16cf/artifacts
+end_time: 1730905709826
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 85deedf4e01a4b1fa9d2fc48581a16cf
+run_name: handsome-bee-574
+run_uuid: 85deedf4e01a4b1fa9d2fc48581a16cf
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1730905704883
+status: 3
+tags: []
+user_id: maxence
