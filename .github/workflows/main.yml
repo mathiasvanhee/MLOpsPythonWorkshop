@@ -1,19 +1,19 @@
 name: Python Continuous Integration
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "test/maxence" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main", "test/maxence" ]
 
 
 env:
   PNPM_VERSION: 8.5.1
   PYTHON_VERSION: 3.10.15
   NODE_VERSION: 18
-  AZURE_RESOURCE_GROUP_NAME: "azure-ml-mathiasvanhee"
+  AZURE_RESOURCE_GROUP_NAME: "azure-ml-waldone"
   AZURE_LOCATION: "northeurope"
-  AZURE_ML_WORKSPACE_NAME: "cats-dogs-mathiasvanhee"
-  AZURE_WEBAPP_NAME: "cats-dogs-mathiasvanhee"
+  AZURE_ML_WORKSPACE_NAME: "waldone"
+  AZURE_WEBAPP_NAME: "waldone"
   DELETE_WEBAPP: "false"
   DOCKER_API_IMAGE_NAME: "mlopspython-api"
   DOCKER_REPOSITORY: ${{ github.repository_owner }}
