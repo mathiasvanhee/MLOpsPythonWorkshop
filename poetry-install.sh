@@ -33,19 +33,12 @@ cd train
 python -m poetry install --no-root
 cd $cwd
 
-cd train/extraction
-python -m poetry install --no-root
-
 cd $cwd
 cd train/test
 python -m poetry install --no-root
 
 cd $cwd
 cd train/train
-python -m poetry install --no-root
-
-cd $cwd
-cd train/label_split_data
 python -m poetry install --no-root
 
 cd $cwd
