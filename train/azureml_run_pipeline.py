@@ -69,31 +69,30 @@ ml_client.begin_create_or_update(cluster_basic).result()
 def azureml_pipeline(
     dataset: Input(type=AssetTypes.URI_FOLDER),
 ):
+
+    # Split the dataset into test and train: 90% train, 10% test
+    #label_split_step = load_component(source="label_split/command.yaml")
+
     train_step = load_component(source="train/command.yaml")
     train_data = train_step(
         dataset=dataset
     )
 
-    # test_step = load_component(source="test/command.yaml")
-    # test_data = test_step(
-    #     model_input=train_data.outputs.model_output,
-    #     integration_input=label_split_data.outputs.split_integration_output,
-    #     images_input=label_split_data.outputs.split_images_output,
-    # )
-    #
-    # output_step = load_component(source="output/command.yaml")
-    # output = output_step(
-    #     extraction_hash_input=extraction.outputs.hash_output,
-    #     extraction_images_input=extraction.outputs.images_output,
-    #     model_input=test_data.outputs.model_output,
-    #     integration_input=test_data.outputs.integration_output,
-    # )
+    test_step = load_component(source="test/command.yaml")
+    test_data = test_step(
+        model_input=train_data.outputs.model_output,
+        images_input=dataset,
+    )
 
-    # return {
-    #     "output": output.outputs.main_output,
-    # }
+    output_step = load_component(source="output/command.yaml")
+    output = output_step(
+        model_input=test_data.outputs.model_output,
+    )
 
-    return {}
+    return {
+        "output": output.outputs.main_output,
+    }
+
 
 pipeline_job = azureml_pipeline(
     dataset=Input(
