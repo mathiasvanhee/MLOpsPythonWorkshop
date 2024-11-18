@@ -88,6 +88,9 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: ${{ env.PYTHON_VERSION }}
+    - name: Check Docker image size
+      run: |
+        docker images <nom_image> --format "{{.Repository}}: {{.Size}}"
     - name: Install Python dependencies
       run: |
         python -m pip install --upgrade pip
