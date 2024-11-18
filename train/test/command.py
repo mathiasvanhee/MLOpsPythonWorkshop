@@ -1,7 +1,6 @@
 import argparse
 from pathlib import Path
 from test import execute_model_and_generate_integration_test_data
-import mlflow
 
 import logging
 
@@ -20,7 +19,3 @@ statistics = execute_model_and_generate_integration_test_data(logging,
                                                               Path(model_input),
                                                               Path(images_input),
                                                               Path(model_output))
-
-mlflow.log_metric("ok", statistics["ok"])
-mlflow.log_metric("ko", statistics["ko"])
-mlflow.log_metric("total", statistics["total"])
