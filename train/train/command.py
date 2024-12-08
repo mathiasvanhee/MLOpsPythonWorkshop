@@ -1,7 +1,15 @@
 import argparse
+import os
 from pathlib import Path
 
 from ultralytics import YOLO
+
+os.environ["MPLCONFIGDIR"] = "/tmp/.matplotlib"
+os.environ["FONTCONFIG_PATH"] = "/tmp/.fontconfig"
+os.environ["YOLO_CONFIG_DIR"] = "/tmp/.ultralytics"
+os.environ["CACHE_DIR"] = "/tmp/cache"
+
+
 
 parser = argparse.ArgumentParser("train")
 parser.add_argument("--dataset", type=str)
