@@ -56,7 +56,7 @@ cluster_name = "simple-cpu-low"
 cluster_basic = AmlCompute(
     name=cluster_name,
     type="amlcompute",
-    size="Standard_D4s_v3",
+    size="Standard_DS2_v2",
     location=location,  # az account list-locations -o table
     min_instances=0,
     max_instances=1,
@@ -67,37 +67,26 @@ ml_client.begin_create_or_update(cluster_basic).result()
 
 @pipeline(default_compute=cluster_name)
 def azureml_pipeline(
-    pdfs_input_data: Input(type=AssetTypes.URI_FOLDER),
-    labels_input_data: Input(type=AssetTypes.URI_FOLDER),
+    dataset: Input(type=AssetTypes.URI_FOLDER),
 ):
-    extraction_step = load_component(source="extraction/command.yaml")
-    extraction = extraction_step(pdfs_input=pdfs_input_data)
 
-    label_split_data_step = load_component(source="label_split_data/command.yaml")
-    label_split_data = label_split_data_step(
-        labels_input=labels_input_data,
-        pdfs_input=pdfs_input_data,
-        images_input=extraction.outputs.images_output,
-    )
+    # Split the dataset into test and train: 90% train, 10% test
+    #label_split_step = load_component(source="label_split/command.yaml")
 
     train_step = load_component(source="train/command.yaml")
     train_data = train_step(
-        split_images_input=label_split_data.outputs.split_images_output
+        dataset=dataset
     )
 
     test_step = load_component(source="test/command.yaml")
     test_data = test_step(
         model_input=train_data.outputs.model_output,
-        integration_input=label_split_data.outputs.split_integration_output,
-        images_input=label_split_data.outputs.split_images_output,
+        images_input=dataset,
     )
 
     output_step = load_component(source="output/command.yaml")
     output = output_step(
-        extraction_hash_input=extraction.outputs.hash_output,
-        extraction_images_input=extraction.outputs.images_output,
         model_input=test_data.outputs.model_output,
-        integration_input=test_data.outputs.integration_output,
     )
 
     return {
@@ -106,12 +95,9 @@ def azureml_pipeline(
 
 
 pipeline_job = azureml_pipeline(
-    pdfs_input_data=Input(
-        path="azureml:cats_dogs_others:1", type=AssetTypes.URI_FOLDER
-    ),
-    labels_input_data=Input(
-        path="azureml:cats_dogs_others_labels:1", type=AssetTypes.URI_FOLDER
-    ),
+    dataset=Input(
+        path="azureml:waldo:1", type=AssetTypes.URI_FOLDER
+    )
 )
 
 

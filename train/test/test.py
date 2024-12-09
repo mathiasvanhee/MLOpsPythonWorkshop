@@ -3,8 +3,6 @@ from pathlib import Path
 
 from mlopspython_inference.inference_pillow import Inference
 
-from integration import prepare_integration_data
-
 model_name = "final_model.keras"
 
 
@@ -12,9 +10,7 @@ def execute_model_and_generate_integration_test_data(
     logging,
     input_model_directory: Path,
     input_images_directory: Path,
-    input_integration_directory: Path,
     model_output_directory: Path,
-    integration_output_directory: Path,
 ):
     logger = logging.getLogger("test")
     model_path = input_model_directory / model_name
@@ -55,8 +51,6 @@ def execute_model_and_generate_integration_test_data(
         json.dump(results, file_stream, indent=4)
     model_path_output = model_output_directory / model_name
     model_path_output.write_bytes(model_path.read_bytes())
-
-    prepare_integration_data(input_integration_directory, integration_output_directory, model.execute)
 
     return statistics
 

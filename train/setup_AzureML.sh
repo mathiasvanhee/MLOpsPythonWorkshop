@@ -14,11 +14,7 @@ az ml workspace create -n "$AZURE_ML_WORKSPACE_NAME" -g $AZURE_RESOURCE_GROUP_NA
 
 # Initialize Azure ML Pdf Dataset
 cwd=$(pwd)
-cd ./extraction
+cd ./train
 chmod +x ./init_dataset.sh
 ./init_dataset.sh "$AZURE_RESOURCE_GROUP_NAME" "$AZURE_ML_WORKSPACE_NAME"
 cd $cwd
-
-# Initialize Azure ML Labels Dataset
-chmod +x ./run_download_labels.sh
-./run_download_labels.sh "$AZURE_RESOURCE_GROUP_NAME" "$AZURE_ML_WORKSPACE_NAME"
